@@ -1,6 +1,7 @@
 ### how to run
 
 ```shell
+rustup override set nightly &&
 cargo install bootimage &&
 rustup component add llvm-tools-preview &&
 cargo bootimage
