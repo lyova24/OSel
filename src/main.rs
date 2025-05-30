@@ -1,7 +1,7 @@
 #![no_std]
 #![no_main]
 
-static GREETING: &[u8] = b"WELCOME TO MY pidorustOS!";
+static GREETING: &[u8] = b"welcome to OSel!";
 
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! {
