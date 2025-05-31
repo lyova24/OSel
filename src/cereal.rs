@@ -2,12 +2,14 @@
 
 use lazy_static::lazy_static;
 use spin::Mutex;
+use core::ops::Deref;
 use uart_16550::SerialPort;
 
 #[doc(hidden)]
 pub fn _print(args: core::fmt::Arguments) {
     use core::fmt::Write;
     SERIAL1
+        .deref()
         .lock()
         .write_fmt(args)
         .expect("Printing to serial failed");
