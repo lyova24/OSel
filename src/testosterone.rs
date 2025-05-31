@@ -1,7 +1,10 @@
 //! testosterone module provides testing utils
 
-#[cfg(test)]
-use crate::qemuno::{QemuExitCode, exit_qemu};
+use crate::qemuno::QemuExitCode;
+use crate::qemuno::exit_qemu;
+use crate::serial_print;
+use crate::serial_println;
+use core::panic::PanicInfo;
 
 #[allow(dead_code)]
 pub trait Testable {
@@ -19,9 +22,8 @@ where
     }
 }
 
-#[cfg(test)]
+#[allow(dead_code)]
 pub fn test_runner(tests: &[&dyn Testable]) {
-    // new
     serial_println!("Running {} tests", tests.len());
     for test in tests {
         test.run(); // new
@@ -34,7 +36,10 @@ pub fn test_main() {
     // dummy function to void error in IDE. Not affecting build or execution, just IDE highlights
 }
 
-#[test_case]
-fn base_test() {
-    assert_eq!(1, 1);
+#[allow(dead_code)]
+pub fn test_panic_handler(info: &PanicInfo) -> ! {
+    serial_println!("[failed]\n");
+    serial_println!("Error: {}\n", info);
+    exit_qemu(QemuExitCode::Failed);
+    loop {}
 }

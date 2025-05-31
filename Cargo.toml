@@ -23,3 +23,13 @@ test-args = [
 ]
 test-success-exit-code = 33
 test-timeout = 60
+
+[[bin]]
+name = "OSel"
+path = "src/main.rs"
+test = false
+
+[lib]
+name = "osel"
+path = "src/lib.rs"
+doctest = false
