@@ -16,11 +16,11 @@ use core::panic::PanicInfo;
 
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! {
-    println!("OSel woke up and ready to go!");
-
+    println!("OSel woke up!");
+    osel::init();
     #[cfg(test)]
     test_main();
-
+    println!("OSel ready to go!");
     loop {}
 }
 
