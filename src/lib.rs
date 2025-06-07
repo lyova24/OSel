@@ -1,6 +1,7 @@
 #![no_std]
 #![cfg_attr(test, no_main)]
 #![feature(custom_test_frameworks)]
+#![feature(abi_x86_interrupt)]
 #![test_runner(crate::testosterone::test_runner)]
 #![reexport_test_harness_main = "test_main"]
 
@@ -16,11 +17,19 @@ pub mod avganec;
 pub mod cereal;
 pub mod qemuno;
 pub mod testosterone;
+pub mod interrupts;
+pub mod gdt;
+
+pub fn init() {
+    gdt::init();
+    interrupts::init_idt();
+}
 
 /// Entry point for `cargo test`
 #[cfg(test)]
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! {
+    init();
     test_main();
     loop {}
 }
