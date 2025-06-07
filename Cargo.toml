@@ -33,3 +33,7 @@ test = false
 name = "osel"
 path = "src/lib.rs"
 doctest = false
+
+[[test]]
+name = "stack_overflow"
+harness = false
