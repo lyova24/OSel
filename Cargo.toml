@@ -24,10 +24,21 @@ test-args = [
 test-success-exit-code = 33
 test-timeout = 60
 
+[features]
+bios = []
+uefi = []
+
 [[bin]]
-name = "OSel"
-path = "src/main.rs"
+name = "OSel-bios"
+path = "src/main_bios.rs"
 test = false
+required-features = ["bios"]
+
+[[bin]]
+name = "OSel-uefi"
+path = "src/main_uefi.rs"
+test = false
+required-features = ["uefi"]
 
 [lib]
 name = "osel"
